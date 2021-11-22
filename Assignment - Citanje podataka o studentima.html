@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citanje podatka o studentima</title>
+</head>
+<body>
+
+  <div class="student-container">
+    <p id="student1" style="margin-bottom: 30px; text-align: left;"></p>
+    <p id="student2" style="margin-bottom: 30px; text-align: left;"></p>
+    <p id="student3" style="margin-bottom: 30px; text-align: left;"></p>
+    <p id="student4" style="margin-bottom: 30px; text-align: left;"></p>
+    <p id="student5" style="margin-bottom: 30px; text-align: left;"></p>
+  </div>
+
+
+  <script>
+
+class Student {
+  constructor(name, address, phone, course) {
+    this.name = name;
+    this.address = address;
+    this.phone = phone;
+    this.course = course;
+  }
+  getInfo() {
+    return "Name: " + this.name + "\n" +
+    "Address: " + this.address + "\n" +
+    "Phone: " + this.phone + "\n" +
+    "Course: " + this.course + "\n"
+  }
+}
+async function getData() {
+  let res = await fetch("https://v-dresevic.github.io/Advanced-JavaScript-Programming/data/students.txt");
+
+  let text = await res.text();
+  return text;
+}
+
+getData().then((res) => {
+  let StudentArray = res.split("\n");
+
+  let Student1 = new Student(StudentArray[0], StudentArray[1], StudentArray[2], StudentArray[3])
+  let Student2 = new Student(StudentArray[4], StudentArray[5], StudentArray[6], StudentArray[7])
+  let Student3 = new Student(StudentArray[8], StudentArray[9], StudentArray[10], StudentArray[11])
+  let Student4 = new Student(StudentArray[12], StudentArray[13], StudentArray[14], StudentArray[15])
+  let Student5 = new Student(StudentArray[16], StudentArray[17], StudentArray[18], StudentArray[19])
+
+
+  document.getElementById("student1").innerText = Student1.getInfo();
+  document.getElementById("student2").innerText = Student2.getInfo();
+  document.getElementById("student3").innerText = Student3.getInfo();
+  document.getElementById("student4").innerText = Student4.getInfo();
+  document.getElementById("student5").innerText = Student5.getInfo();
+})
+
+
+
+
+  </script>
+</body>
+</html>
